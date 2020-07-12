@@ -22,7 +22,7 @@ const saveNote = (note) => {
     data: note,
     method: "POST",
   });
-};
+}; 
 
 // A function for deleting a note from the db
 const deleteNote = (id) => {

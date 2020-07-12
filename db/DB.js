@@ -10,7 +10,7 @@ class DB {
         try {
             const notesRaw = await readFileAsync(notesData, "utf8")
             return notesRaw ? JSON.parse(notesRaw) : []
-        } catch (err) {
+        } catch (e) {
             console.log("Something went wront while READING notes", e)
         }
     }
