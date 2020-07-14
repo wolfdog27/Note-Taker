@@ -24,12 +24,10 @@ class DB {
     }
 
     async deleteNotes(availableNotes, noteID) {
+        console.log('note',noteID);
         try {
-            const filteredNotes = availableNotes.filter(function (note) {
-                if (note.id !== noteID) {
-                    return true;
-                }
-            })
+            const filteredNotes = availableNotes.filter(note => note.id !== parseInt(noteID))
+            console.log('filtered', filteredNotes);
             await writeFileAsync(notesData, JSON.stringify(filteredNotes))
         } catch (e) {
             console.log("Something went wrong while DELETING notes")
