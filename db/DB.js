@@ -22,6 +22,19 @@ class DB {
             console.log("Something went wrong while WRITING notes", e);
         }
     }
+
+    async deleteNotes(availableNotes, noteID) {
+        try {
+            const filteredNotes = availableNotes.filter(function (note) {
+                if (note.id !== noteID) {
+                    return true;
+                }
+            })
+            await writeFileAsync(notesData, JSON.stringify(filteredNotes))
+        } catch (e) {
+            console.log("Something went wrong while DELETING notes")
+        }
+    }
 }
 
 // delete note should read the db.json first, then find the note that has the id that we got from the front end, delete that from the Data, and rewrite db.json

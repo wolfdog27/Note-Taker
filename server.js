@@ -29,7 +29,7 @@ app.get("/api/notes", async (req, res) => {
 
 app.post("/api/notes", async (req, res) => {
     const newNote = req.body;
-    newNote.id = Math.floor(Math.random() * 716)
+    newNote.id = Math.floor(Math.random() * 900)
     const availableNotes = await DB.readNotes();
     await DB.writeNotes([newNote, ...availableNotes]);
     res.json(newNote);
@@ -39,13 +39,17 @@ app.post("/api/notes", async (req, res) => {
 app.delete("/api/notes/:id", async(req,res)=>{
 const noteId = req.params.id
 console.log(noteId);
-const newNote = req.body;
 const availableNotes = await DB.readNotes();
-const notesLeft = availableNotes.filter(newNote => newNote.id !== noteId)
-await DB.writeNotes([...availableNotes]);
-res.json(newNote);
-console.log(newNote)
+await DB.deleteNotes(availableNotes, noteId)
+res.json();
+
 })
+
+// const newNote = req.body;
+// const availableNotes = await DB.readNotes();
+// const notesLeft = availableNotes.filter(newNote => newNote.id !== noteId) ???  I got lost with the learning assistant
+
+
 
 
 
