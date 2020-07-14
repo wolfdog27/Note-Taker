@@ -1,6 +1,6 @@
 const util = require("util");
 const fs = require("fs");
-const notesData = "./db.json"
+const notesData = "./db/db.json"
 
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
@@ -23,6 +23,8 @@ class DB {
         }
     }
 }
+
+// delete note should read the db.json first, then find the note that has the id that we got from the front end, delete that from the Data, and rewrite db.json
 
 // testDB = new DB();
 // testDB.writeNotes({

@@ -16,13 +16,11 @@ app.get("/notes", function (req, res) {
 
 });
 
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "/public/index.html"));
-});
 
 app.get("/api/notes", async (req, res) => {
+    let availableNotes;
     try{
-        const availableNotes = await DB.readNotes();
+        availableNotes = await DB.readNotes();
     } catch(e) {
         console.log(e);
     }
@@ -31,12 +29,23 @@ app.get("/api/notes", async (req, res) => {
 
 app.post("/api/notes", async (req, res) => {
     const newNote = req.body;
+    newNote.id = Math.floor(Math.random() * 716)
     const availableNotes = await DB.readNotes();
     await DB.writeNotes([newNote, ...availableNotes]);
     res.json(newNote);
+    console.log(newNote)
 });
 
+app.delete("/api/notes/:id", async(req,res)=>{
+const noteId = req.params.id
+console.log(noteId);
 
+})
+
+
+app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "/public/index.html"));
+});
 
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
