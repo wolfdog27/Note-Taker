@@ -39,7 +39,12 @@ app.post("/api/notes", async (req, res) => {
 app.delete("/api/notes/:id", async(req,res)=>{
 const noteId = req.params.id
 console.log(noteId);
+const newNote = req.body;
 const availableNotes = await DB.readNotes();
+const notesLeft = availableNotes.filter(newNote => newNote.id !== noteId)
+await DB.writeNotes([...availableNotes]);
+res.json(newNote);
+console.log(newNote)
 })
 
 
