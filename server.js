@@ -39,8 +39,9 @@ app.post("/api/notes", async (req, res) => {
 app.delete("/api/notes/:id", async(req,res)=>{
 const noteId = req.params.id
 console.log(noteId);
-
+const availableNotes = await DB.readNotes();
 })
+
 
 
 app.get("*", function (req, res) {
